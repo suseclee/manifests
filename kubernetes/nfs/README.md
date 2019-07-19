@@ -3,7 +3,7 @@
 
 # Deploy nfs server and storageClass in Kubernetes
 ```
-kubectl apply -f manifests/kubernetes/nfs
+kubectl create -f manifests/kubernetes/nfs
 ```
 
 # Veriify NFS
