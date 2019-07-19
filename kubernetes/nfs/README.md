@@ -69,4 +69,6 @@ write-pod                          0/1     Completed   0          2m10s
 ```
 
 # Delete  
+```
 kubectl delete -f manifests/kubernetes/nfs
+```
