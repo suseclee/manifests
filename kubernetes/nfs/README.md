@@ -1,7 +1,7 @@
 
-### git clone git@github.com:suseclee/manifests.git
+##### git clone git@github.com:suseclee/manifests.git
 
-# Deploy nfs server and storageClass
+# Deploy nfs server and storageClass in Kubernetes
 ```
 kubectl create -f manifests/kubernetes/nfs
 ```
