@@ -3,7 +3,7 @@
 
 # Deploy nfs server and storageClass in Kubernetes
 ```
-kubectl create -f manifests/kubernetes/nfs
+kubectl apply -f manifests/kubernetes/nfs
 ```
 
 # Veriify NFS
@@ -13,9 +13,6 @@ NAME              SECRETS   AGE
 default           1         22m
 nfs-provisioner   1         16s
 
-kubectl get pv
-NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM              STORAGECLASS   REASON   AGE
-pvc-f17f6915-1b2a-453b-9261-f8e20f33615a   4Gi        RWX            Delete           Bound    default/nfsclaim   persistent              3s
 
 kubectl get pvc
 NAME       STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
