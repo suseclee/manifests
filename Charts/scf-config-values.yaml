@@ -1,0 +1,30 @@
+###scf-config-values.yaml
+env:
+  # Enter the domain you created for your CAP cluster
+  # assign a worker node an external ip address, and map this
+  # to the domain name
+  DOMAIN: 10.86.0.28.omg.howdoi.website
+  UAA_HOST: uaa.10.86.0.28.omg.howdoi.website
+  GARDEN_ROOTFS_DRIVER: "overlay-xfs"  
+
+kube:
+  # here we need the worked node externap ip so stratos works
+  # and we need the internap ip addresses of the worker nodes
+  # to provide access to internal services
+  external_ips: ["10.86.0.28", "10.86.0.22", "10.86.0.116"]
+  storage_class:
+    persistent: "persistent"
+    shared: "shared"
+
+  # The registry the images will be fetched from.
+  # The values below should work for
+  # a default installation from the SUSE registry.
+  registry:
+    hostname: "registry.suse.com"
+    username: ""
+    password: ""
+  organization: "cap"
+
+secrets:
+  CLUSTER_ADMIN_PASSWORD: changeme
+  UAA_ADMIN_CLIENT_SECRET: cant-guess-this
