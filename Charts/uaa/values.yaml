@@ -188,7 +188,7 @@ sizing:
       limit: ~
 
     disk_sizes:
-      mysql_data: 5
+      mysql_data: 2
 
     # Unit [MiB]
     memory:

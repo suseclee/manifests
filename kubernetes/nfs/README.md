@@ -6,7 +6,7 @@
 kubectl create -f manifests/kubernetes/nfs
 ```
 
-# Veriify NFS
+# Verify NFS
 ```
 kubectl get sa
 NAME              SECRETS   AGE

@@ -18,11 +18,11 @@ So I changed by Jan's pathch adn reduced data sized to fit into testrunner node 
    Applied:
    1. https://gist.github.com/jandubois/a7d307360d435f31fc4883621ac33c40
    2. reduced disk sapces 
-      uaa; mysql 5 G
-      scf: mysql: 5 G
-           blob: 5 G
-           grootfs: 5G
-           postgres: 5G
+      uaa; mysql 2G
+      scf: mysql: 2G
+           blob: 2G
+           grootfs: 2G
+           postgres: 2G
            
            
            
@@ -141,3 +141,20 @@ st  ratos-db-6d74cd9fc5-zj7bm   1/1     Running     0          4m26s
 vo  lume-migration-1-zxpf5      0/1     Completed   0          4m26s
     ```
     
+    
+    
+### Help delete Helm deployment
+##### helm delete scf --purge
+##### helm delete uaa --purge
+##### kubectl delete ns scf
+##### kubectl delete ns uaa
+
+
+
+### Modify Helm Chart
+##### mkdir chart; cd chart
+##### helm fetch suse/cf --version 2.17.1 --untar
+##### helm fetch suse/uaa --version 2.17.1 --untar
+##### Modify yaml files
+##### helm install /chart/uaa --name uaa --namespace uaa --values=chart/scf-config-values.yaml
+##### helm install /chart/cf --name scf --namespace scf --values=chart/scf-config-values.yaml --set "secrets.UAA_CA_CERT=${CA_CERT}"

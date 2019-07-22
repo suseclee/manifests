@@ -1119,7 +1119,7 @@ sizing:
       limit: ~
 
     disk_sizes:
-      postgres_data: 5
+      postgres_data: 2
 
     # Unit [MiB]
     memory:
@@ -1174,7 +1174,7 @@ sizing:
       limit: ~
 
     disk_sizes:
-      blobstore_data: 5
+      blobstore_data: 2
 
     # Unit [MiB]
     memory:
@@ -1418,7 +1418,7 @@ sizing:
       limit: ~
 
     disk_sizes:
-      grootfs_data: 5
+      grootfs_data: 2
 
     # Unit [MiB]
     memory:
@@ -1644,7 +1644,7 @@ sizing:
       limit: ~
 
     disk_sizes:
-      mysql_data: 5
+      mysql_data: 2
 
     # Unit [MiB]
     memory:
