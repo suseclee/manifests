@@ -1,8 +1,4 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: nfs-provisioner
----
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -23,44 +19,6 @@ spec:
   selector:
     app: nfs-provisioner
 ---
-kind: Pod
-apiVersion: v1
-metadata:
-  name: nfs-provisioner
-spec:
-  serviceAccount: nfs-provisioner
-  containers:
-    - name: nfs-provisioner
-      image: quay.io/kubernetes_incubator/nfs-provisioner:latest
-      ports:
-        - name: nfs
-          containerPort: 2049
-        - name: mountd
-          containerPort: 20048
-        - name: rpcbind
-          containerPort: 111
-        - name: rpcbind-udp
-          containerPort: 111
-          protocol: UDP
-      securityContext:
-        privileged: true
-      args:
-        - "-provisioner=nfs"
-        - "-grace-period=0"
-      env:
-        - name: POD_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-      imagePullPolicy: "IfNotPresent"
-      volumeMounts:
-        - name: export-volume
-          mountPath: /export
-  volumes:
-    - name: export-volume
-      hostPath:
-        path: /srv
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -71,7 +29,7 @@ spec:
       app: nfs-provisioner
   replicas: 1
   strategy:
-    type: Recreate 
+    type: Recreate
   template:
     metadata:
       labels:
