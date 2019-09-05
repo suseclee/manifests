@@ -229,7 +229,19 @@ $ git rebase -i HEAD~1
 
 Now, you can replace "pick" with "r" and just change the commit message.
 
+### [Cherrypicking]
 
+Cherry picking in Git means to choose a commit from one branch and apply it onto another:
+```shell
+#Make sure you are on the branch you want to apply the commit to.
+
+$ git checkout master
+$ git pull upstream master
+$ git cherry-pick <commit-hash>
+
+#If you cherry-pick from a public branch, you should consider using
+git cherry-pick -x <commit-hash>
+```
 ### [Manually Set Tracking](https://www.kernel.org/pub/software/scm/git/docs/git-config.html)
 
 Perhaps you forgot to setup tracking when you pulled down a remote branch. No worries:
