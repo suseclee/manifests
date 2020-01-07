@@ -12,11 +12,11 @@ spec:
       - "-c"
       - "test -f /mnt/SUCCESS && exit 0 || exit 1"
     volumeMounts:
-      - name: nfs-pvc
+      - name: test-nfs-pvc
         mountPath: "/mnt"
   restartPolicy: "Never"
   volumes:
-    - name: nfs-pvc
+    - name: test-nfs-pvc
       persistentVolumeClaim:
-        claimName: nfs-claim
+        claimName: nfs-test
 

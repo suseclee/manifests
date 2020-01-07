@@ -23,7 +23,7 @@ spec:
   selector:
     app: nfs-provisioner
 ---
-kind: StatefulSet
+kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: nfs-provisioner
@@ -31,15 +31,15 @@ spec:
   selector:
     matchLabels:
       app: nfs-provisioner
-  serviceName: "nfs-provisioner"
   replicas: 1
+  strategy:
+    type: Recreate 
   template:
     metadata:
       labels:
         app: nfs-provisioner
     spec:
       serviceAccount: nfs-provisioner
-      terminationGracePeriodSeconds: 10
       containers:
         - name: nfs-provisioner
           image: quay.io/kubernetes_incubator/nfs-provisioner:latest
@@ -59,7 +59,7 @@ spec:
                 - DAC_READ_SEARCH
                 - SYS_RESOURCE
           args:
-            - "-provisioner=nfs"
+            - "-provisioner=example.com/nfs"
           env:
             - name: POD_IP
               valueFrom:
@@ -78,4 +78,4 @@ spec:
       volumes:
         - name: export-volume
           hostPath:
-            path: /srv
+            path: /nfs
