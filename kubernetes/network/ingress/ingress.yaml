@@ -6,13 +6,18 @@ metadata:
     ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - host: chang.apple
+    http:
       paths:
         - path: /apple
           backend:
             serviceName: apple-service
             servicePort: 5678
+  - host: chang.banana
+    http:
+      paths:
         - path: /banana
           backend:
             serviceName: banana-service
             servicePort: 5678
+
