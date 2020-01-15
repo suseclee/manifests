@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: apple
+  ports:
+    - port: 80 # Default port for image
+      targetPort: 5678
+
+
+
