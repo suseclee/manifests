@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 # imagePullSecrets:
 
@@ -12,7 +12,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: NodePort
 
   nfsPort: 2049
   mountdPort: 20048
@@ -24,7 +24,7 @@ service:
   externalIPs: []
 
 persistence:
-  enabled: false
+  enabled: true
 
   ## Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -36,7 +36,7 @@ persistence:
   # storageClass: "-"
 
   accessMode: ReadWriteMany
-  size: 1Gi
+  size: 30Gi
 
 ## For creating the StorageClass automatically:
 storageClass:
