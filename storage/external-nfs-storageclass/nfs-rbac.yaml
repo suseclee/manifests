@@ -1,9 +1,14 @@
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
+kind: ServiceAccount
+apiVersion: v1
 metadata:
-  name: nfs-provisioner-runner
+  name: nfs-pod-provisioner-sa
+---
+kind: ClusterRole # Role of kubernetes
+apiVersion: rbac.authorization.k8s.io/v1 # auth API
+metadata:
+  name: nfs-provisioner-clusterRole
 rules:
-  - apiGroups: [""]
+  - apiGroups: [""] # rules on persistentvolumes
     resources: ["persistentvolumes"]
     verbs: ["get", "list", "watch", "create", "delete"]
   - apiGroups: [""]
@@ -15,32 +20,24 @@ rules:
   - apiGroups: [""]
     resources: ["events"]
     verbs: ["create", "update", "patch"]
-  - apiGroups: [""]
-    resources: ["services", "endpoints"]
-    verbs: ["get"]
-  - apiGroups: ["extensions"]
-    resources: ["podsecuritypolicies"]
-    resourceNames: ["nfs-provisioner"]
-    verbs: ["use"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: run-nfs-provisioner
+  name: nfs-provisioner-rolebinding
 subjects:
   - kind: ServiceAccount
-    name: nfs-provisioner
-     # replace with namespace where provisioner is deployed
+    name: nfs-pod-provisioner-sa # defined on top of file
     namespace: default
-roleRef:
+roleRef: # binding cluster role to service account
   kind: ClusterRole
-  name: nfs-provisioner-runner
+  name: nfs-provisioner-clusterRole # name defined in clusterRole
   apiGroup: rbac.authorization.k8s.io
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: leader-locking-nfs-provisioner
+  name: nfs-pod-provisioner-otherRoles
 rules:
   - apiGroups: [""]
     resources: ["endpoints"]
@@ -49,13 +46,13 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: leader-locking-nfs-provisioner
+  name: nfs-pod-provisioner-otherRoles
 subjects:
   - kind: ServiceAccount
-    name: nfs-provisioner
+    name: nfs-pod-provisioner-sa # same as top of the file
     # replace with namespace where provisioner is deployed
     namespace: default
 roleRef:
   kind: Role
-  name: leader-locking-nfs-provisioner
+  name: nfs-pod-provisioner-otherRoles
   apiGroup: rbac.authorization.k8s.io
