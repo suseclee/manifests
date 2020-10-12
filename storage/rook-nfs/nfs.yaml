@@ -59,16 +59,18 @@ spec:
   replicas: 1
   exports:
   - name: nfs-share
+    #server:
+    #  accessMode: ReadWrite
+    #  squash: "none"
+
     server:
       allowedClients:
       - name: allGroup
-        clients:
-        - "*"
+        clients: 
+        - "all"
         accessMode: ReadWrite
-        squash: none
+        squash: "none"
 
-      #accessMode: ReadWrite
-      #squash: "none"
     # A Persistent Volume Claim must be created before creating NFS CRD instance.
     persistentVolumeClaim:
       claimName: nfs-default-claim

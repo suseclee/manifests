@@ -1,4 +1,4 @@
-# NOT Working
+# WIP
 
 #Prerequites
 ```
@@ -17,12 +17,17 @@ kubectl apply -f nfs.yaml
 ### Error 
 ```
 kubectl -n rook-nfs get nfsservers.nfs.rook.io
-No resources found in rook-nfs namespace.
-
-# This output should show the following
-kubectl -n rook-nfs get nfsservers.nfs.rook.io
 NAME       AGE   STATE
-rook-nfs   32s   Running
+rook-nfs   41h   Error
+
+kubectl -n rook-nfs describe nfsservers.nfs.rook.io rook-nfs
+Status:
+  State:  Error
+Events:
+  Type     Reason  Age   From          Message
+  ----     ------  ----  ----          -------
+  Warning  Failed  41h   nfs-operator  Invalid NFSServer spec: [spec.exports[0].server.accessMode: Invalid value: "": valid values are (ReadOnly, ReadWrite, none), spec.exports[0].server.squash: Invalid value: "": valid values are (none, rootId, root, all)]
+
 ```
 
 ```
